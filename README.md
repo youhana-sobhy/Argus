@@ -33,6 +33,16 @@ Network changes in a large data center fabric are slow and risky because the kno
 
 The MVP targets **Cisco ACI**. The connector design is ready for NX-OS, FortiGate, Juniper, Palo Alto and VMware.
 
+## Executive presentation: `/present`
+
+AutoHero has a built-in presentation page about the application at **http://127.0.0.1:8000/present** (or `http://<host>:8000/present` on a server).
+
+- **Who it's for:** managers and senior leadership. It explains the platform in plain, non-technical language.
+- **What it covers:** the problem, the three capabilities (Ingest, Ask, Act), how a change flows from request to verified result, how the AI keeps data private, the safety guardrails, the business value and the roadmap.
+- **Access:** public. It needs no login and shows no network data, so it's safe to put on a meeting-room screen.
+- **How to use it in a demo:** open it first as your opening slide, scroll through it, then click **Open live demo** to go to the sign-in page.
+- **Source:** `autohero/web/templates/present.html` (route in `autohero/main.py`).
+
 ## Screenshots
 
 | | |
@@ -53,7 +63,7 @@ python -m venv .venv
 # Windows: .venv\Scripts\activate    macOS/Linux: source .venv/bin/activate
 pip install -e ".[dev]"
 cp .env.example .env          # optional: adjust settings
-autohero serve                # http://127.0.0.1:8000
+autohero serve                # http://127.0.0.1:8000  (executive overview: /present)
 ```
 
 ### Option B: Docker Compose (on-prem)
@@ -77,6 +87,8 @@ All of them use the password in `AUTOHERO_DEMO_PASSWORD`. The default in `.env.e
 | `admin` | admin | Everything, plus resetting the mock lab (still can't approve their own change) |
 
 ## Five-minute demo script (for management)
+
+> **Executive overview page:** open **http://127.0.0.1:8000/present** first. It is a one-page, non-technical summary of what AutoHero does, made for managers. It needs no login and shows no fabric data. Use it as the opening slide, then click **Open live demo**.
 
 1. **Sign in as `engineer`.** The overview shows fabric health, open changes and a down link that needs attention.
 2. **Topology:** click `bleaf106` to see the down uplink to `spine202`. Switch to **Logical**, pick `VF-5GC` and notice that `LEGACY_BD` is flagged as unused.
@@ -168,7 +180,7 @@ The full design (components, data model, lifecycle, security, deployment, extens
 
 ```
 autohero/
-  main.py              FastAPI app + page routes
+  main.py              FastAPI app + page routes (incl. public /present overview)
   config.py            settings from env / .env
   db.py                SQLAlchemy models (users, changes, events, audit)
   cli.py               `autohero serve | export | reset-lab`
@@ -185,7 +197,7 @@ tests/                 planner, API lifecycle, RBAC, AI/redaction tests
 
 ## API
 
-Interactive OpenAPI docs are at `/docs` once the app is running. The key endpoints:
+Interactive OpenAPI docs are at `/docs` once the app is running. The executive presentation is at `/present` (no login). The key endpoints:
 
 | Method | Path | Purpose |
 |---|---|---|

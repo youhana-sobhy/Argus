@@ -63,3 +63,11 @@ def test_pages_render(login):
     for p in ("/", "/topology", "/inventory", "/assistant", "/changes", "/changes/new"):
         assert eng.get(p).status_code == 200, p
     assert eng.get("/audit", follow_redirects=False).status_code == 303  # engineer has no audit.read
+
+
+def test_present_page_is_public(app):
+    from fastapi.testclient import TestClient
+
+    with TestClient(app) as c:
+        r = c.get("/present", follow_redirects=False)
+        assert r.status_code == 200 and "AutoHero" in r.text

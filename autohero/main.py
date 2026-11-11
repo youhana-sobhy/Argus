@@ -66,6 +66,11 @@ def create_app() -> FastAPI:
     app.get("/changes/{change_id}", response_class=HTMLResponse, include_in_schema=False)(page("changes", "change_detail.html"))
     app.get("/audit", response_class=HTMLResponse, include_in_schema=False)(page("audit", "audit.html", "audit.read"))
 
+    @app.get("/present", response_class=HTMLResponse, include_in_schema=False)
+    async def present_page(request: Request):
+        # Public executive overview for management demos. Static content only: no fabric data.
+        return templates.TemplateResponse(request, "present.html", {"system": system_info()})
+
     @app.get("/login", response_class=HTMLResponse, include_in_schema=False)
     async def login_page(request: Request, user: Principal | None = Depends(current_user_optional)):
         if user is not None:

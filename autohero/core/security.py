@@ -103,7 +103,7 @@ def require(permission: str):
 
 DEMO_USERS = [
     ("admin", "Platform Admin", "admin"),
-    ("engineer", "Nadia Engineer", "engineer"),
+    ("engineer", "Youhana Engineer", "engineer"),
     ("approver", "Omar Approver", "approver"),
     ("viewer", "Sara Viewer", "viewer"),
 ]
@@ -111,6 +111,9 @@ DEMO_USERS = [
 
 def seed_users(db: Session, demo_password: str) -> None:
     for username, name, role in DEMO_USERS:
-        if not db.scalar(select(User).where(User.username == username)):
+        user = db.scalar(select(User).where(User.username == username))
+        if user is None:
             db.add(User(username=username, full_name=name, role=role, password_hash=hash_password(demo_password)))
+        elif user.full_name != name:
+            user.full_name = name  # keep demo display names in sync with DEMO_USERS
     db.commit()
