@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card">
+  <div class="card-h">
+    <div class="seg" id="topo-mode"><button class="on" data-mode="physical">Physical fabric</button><button data-mode="logical">Logical (tenants)</button></div>
+    <div id="tenant-pick" class="seg hidden"></div>
+    <div class="right">
+      <div class="legend" id="legend-phys">
+        <span><i style="background:#9AA1A8"></i>Link up</span>
+        <span><i style="background:#E3051B;height:3px;background-image:repeating-linear-gradient(90deg,#E3051B 0 5px,transparent 5px 9px)"></i>Link down</span>
+        <span><i style="background:#E3051B;width:10px;height:10px;border-radius:3px"></i>Spine</span>
+        <span><i style="background:#2E3338;width:10px;height:10px;border-radius:3px"></i>Leaf</span>
+        <span><i style="background:#1F63C9;width:10px;height:10px;border-radius:3px"></i>APIC</span>
+      </div>
+      <button class="btn sm" id="topo-refresh">{{ icon('refresh') }}Refresh</button>
+    </div>
+  </div>
+  <div class="topo-wrap">
+    <div class="topo-canvas" id="topo-canvas"></div>
+    <aside class="topo-panel" id="topo-panel">
+      <h3>Select an element</h3>
+      <p class="muted small">Click a node to see its model, version, management address and links. In the logical view, click any tenant object for details.</p>
+    </aside>
+  </div>
+</div>
+{% endblock %}

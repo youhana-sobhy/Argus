@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card">
+  <div class="card-h">
+    <div class="seg" id="ch-filter">
+      <button class="on" data-f="all">All</button><button data-f="approval">Awaiting approval</button>
+      <button data-f="ready">Ready to execute</button><button data-f="done">Done</button><button data-f="problem">Blocked / failed</button>
+    </div>
+    <div class="right">{% if 'change.create' in user.permissions %}<a class="btn primary" href="/changes/new">{{ icon('plus') }}New change</a>{% endif %}</div>
+  </div>
+  <div class="card-b flush"><table class="t"><thead><tr><th>Ref</th><th>Change</th><th>Status</th><th>Risk</th><th>Requested by</th><th>Approved by</th><th>Updated</th></tr></thead>
+    <tbody id="ch-rows"><tr><td colspan="7" class="empty">Loading…</td></tr></tbody></table></div>
+</div>
+{% endblock %}

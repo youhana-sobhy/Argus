@@ -1,0 +1,1102 @@
+{
+ "_comment": "AutoHero mock lab. Native Cisco APIC REST JSON (class query results). Not real Vodafone data.",
+ "fabric": "VF-DC1-ACI",
+ "controllerVersion": "6.0(5h)",
+ "imdata": {
+  "fvTenant": [
+   {
+    "fvTenant": {
+     "attributes": {
+      "dn": "uni/tn-common",
+      "name": "common",
+      "descr": "Shared services"
+     },
+     "children": [
+      {
+       "fvCtx": {
+        "attributes": {
+         "name": "default",
+         "pcEnfPref": "enforced",
+         "descr": ""
+        }
+       }
+      },
+      {
+       "fvBD": {
+        "attributes": {
+         "name": "default",
+         "descr": "",
+         "unicastRoute": "yes",
+         "arpFlood": "no",
+         "unkMacUcastAct": "proxy"
+        },
+        "children": [
+         {
+          "fvRsCtx": {
+           "attributes": {
+            "tnFvCtxName": "default"
+           }
+          }
+         }
+        ]
+       }
+      }
+     ]
+    }
+   },
+   {
+    "fvTenant": {
+     "attributes": {
+      "dn": "uni/tn-VF-CORE",
+      "name": "VF-CORE",
+      "descr": "Core IT services"
+     },
+     "children": [
+      {
+       "fvCtx": {
+        "attributes": {
+         "name": "PROD_VRF",
+         "pcEnfPref": "enforced",
+         "descr": "Production"
+        }
+       }
+      },
+      {
+       "fvCtx": {
+        "attributes": {
+         "name": "MGMT_VRF",
+         "pcEnfPref": "enforced",
+         "descr": "Management"
+        }
+       }
+      },
+      {
+       "fvBD": {
+        "attributes": {
+         "name": "WEB_BD",
+         "descr": "Web tier",
+         "unicastRoute": "yes",
+         "arpFlood": "no",
+         "unkMacUcastAct": "proxy"
+        },
+        "children": [
+         {
+          "fvRsCtx": {
+           "attributes": {
+            "tnFvCtxName": "PROD_VRF"
+           }
+          }
+         },
+         {
+          "fvSubnet": {
+           "attributes": {
+            "ip": "10.10.10.1/24",
+            "scope": "private"
+           }
+          }
+         }
+        ]
+       }
+      },
+      {
+       "fvBD": {
+        "attributes": {
+         "name": "APP_BD",
+         "descr": "Application tier",
+         "unicastRoute": "yes",
+         "arpFlood": "no",
+         "unkMacUcastAct": "proxy"
+        },
+        "children": [
+         {
+          "fvRsCtx": {
+           "attributes": {
+            "tnFvCtxName": "PROD_VRF"
+           }
+          }
+         },
+         {
+          "fvSubnet": {
+           "attributes": {
+            "ip": "10.10.20.1/24",
+            "scope": "private"
+           }
+          }
+         }
+        ]
+       }
+      },
+      {
+       "fvBD": {
+        "attributes": {
+         "name": "DB_BD",
+         "descr": "Database tier",
+         "unicastRoute": "yes",
+         "arpFlood": "no",
+         "unkMacUcastAct": "proxy"
+        },
+        "children": [
+         {
+          "fvRsCtx": {
+           "attributes": {
+            "tnFvCtxName": "PROD_VRF"
+           }
+          }
+         },
+         {
+          "fvSubnet": {
+           "attributes": {
+            "ip": "10.10.30.1/24",
+            "scope": "private"
+           }
+          }
+         }
+        ]
+       }
+      },
+      {
+       "fvBD": {
+        "attributes": {
+         "name": "MGMT_BD",
+         "descr": "Out-of-band tooling",
+         "unicastRoute": "yes",
+         "arpFlood": "no",
+         "unkMacUcastAct": "proxy"
+        },
+        "children": [
+         {
+          "fvRsCtx": {
+           "attributes": {
+            "tnFvCtxName": "MGMT_VRF"
+           }
+          }
+         },
+         {
+          "fvSubnet": {
+           "attributes": {
+            "ip": "10.99.0.1/24",
+            "scope": "private"
+           }
+          }
+         }
+        ]
+       }
+      },
+      {
+       "fvAp": {
+        "attributes": {
+         "name": "ECOMMERCE_AP",
+         "descr": "Online shop"
+        },
+        "children": [
+         {
+          "fvAEPg": {
+           "attributes": {
+            "name": "WEB_EPG",
+            "descr": "Web servers"
+           },
+           "children": [
+            {
+             "fvRsBd": {
+              "attributes": {
+               "tnFvBDName": "WEB_BD"
+              }
+             }
+            }
+           ]
+          }
+         },
+         {
+          "fvAEPg": {
+           "attributes": {
+            "name": "APP_EPG",
+            "descr": "App servers"
+           },
+           "children": [
+            {
+             "fvRsBd": {
+              "attributes": {
+               "tnFvBDName": "APP_BD"
+              }
+             }
+            }
+           ]
+          }
+         },
+         {
+          "fvAEPg": {
+           "attributes": {
+            "name": "DB_EPG",
+            "descr": "Databases"
+           },
+           "children": [
+            {
+             "fvRsBd": {
+              "attributes": {
+               "tnFvBDName": "DB_BD"
+              }
+             }
+            }
+           ]
+          }
+         }
+        ]
+       }
+      },
+      {
+       "fvAp": {
+        "attributes": {
+         "name": "MGMT_AP",
+         "descr": "Management"
+        },
+        "children": [
+         {
+          "fvAEPg": {
+           "attributes": {
+            "name": "MGMT_EPG",
+            "descr": "Jump hosts"
+           },
+           "children": [
+            {
+             "fvRsBd": {
+              "attributes": {
+               "tnFvBDName": "MGMT_BD"
+              }
+             }
+            }
+           ]
+          }
+         }
+        ]
+       }
+      },
+      {
+       "l3extOut": {
+        "attributes": {
+         "name": "CORE_L3OUT",
+         "descr": "Uplink to WAN core"
+        },
+        "children": [
+         {
+          "l3extRsEctx": {
+           "attributes": {
+            "tnFvCtxName": "PROD_VRF"
+           }
+          }
+         }
+        ]
+       }
+      }
+     ]
+    }
+   },
+   {
+    "fvTenant": {
+     "attributes": {
+      "dn": "uni/tn-VF-5GC",
+      "name": "VF-5GC",
+      "descr": "5G Core network functions"
+     },
+     "children": [
+      {
+       "fvCtx": {
+        "attributes": {
+         "name": "5GC_VRF",
+         "pcEnfPref": "enforced",
+         "descr": "5G core"
+        }
+       }
+      },
+      {
+       "fvBD": {
+        "attributes": {
+         "name": "AMF_BD",
+         "descr": "AMF signalling",
+         "unicastRoute": "yes",
+         "arpFlood": "no",
+         "unkMacUcastAct": "proxy"
+        },
+        "children": [
+         {
+          "fvRsCtx": {
+           "attributes": {
+            "tnFvCtxName": "5GC_VRF"
+           }
+          }
+         },
+         {
+          "fvSubnet": {
+           "attributes": {
+            "ip": "10.50.1.1/24",
+            "scope": "private"
+           }
+          }
+         }
+        ]
+       }
+      },
+      {
+       "fvBD": {
+        "attributes": {
+         "name": "SMF_BD",
+         "descr": "SMF control",
+         "unicastRoute": "yes",
+         "arpFlood": "no",
+         "unkMacUcastAct": "proxy"
+        },
+        "children": [
+         {
+          "fvRsCtx": {
+           "attributes": {
+            "tnFvCtxName": "5GC_VRF"
+           }
+          }
+         },
+         {
+          "fvSubnet": {
+           "attributes": {
+            "ip": "10.50.2.1/24",
+            "scope": "private"
+           }
+          }
+         }
+        ]
+       }
+      },
+      {
+       "fvBD": {
+        "attributes": {
+         "name": "UPF_BD",
+         "descr": "UPF user plane",
+         "unicastRoute": "yes",
+         "arpFlood": "yes",
+         "unkMacUcastAct": "proxy"
+        },
+        "children": [
+         {
+          "fvRsCtx": {
+           "attributes": {
+            "tnFvCtxName": "5GC_VRF"
+           }
+          }
+         },
+         {
+          "fvSubnet": {
+           "attributes": {
+            "ip": "10.50.3.1/24",
+            "scope": "private"
+           }
+          }
+         },
+         {
+          "fvSubnet": {
+           "attributes": {
+            "ip": "10.50.4.1/24",
+            "scope": "private"
+           }
+          }
+         }
+        ]
+       }
+      },
+      {
+       "fvBD": {
+        "attributes": {
+         "name": "LEGACY_BD",
+         "descr": "Decommissioned - no EPGs",
+         "unicastRoute": "yes",
+         "arpFlood": "no",
+         "unkMacUcastAct": "proxy"
+        },
+        "children": [
+         {
+          "fvRsCtx": {
+           "attributes": {
+            "tnFvCtxName": "5GC_VRF"
+           }
+          }
+         },
+         {
+          "fvSubnet": {
+           "attributes": {
+            "ip": "10.50.9.1/24",
+            "scope": "private"
+           }
+          }
+         }
+        ]
+       }
+      },
+      {
+       "fvAp": {
+        "attributes": {
+         "name": "5GC_CORE_AP",
+         "descr": "5G SA core"
+        },
+        "children": [
+         {
+          "fvAEPg": {
+           "attributes": {
+            "name": "AMF_EPG",
+            "descr": "AMF pods"
+           },
+           "children": [
+            {
+             "fvRsBd": {
+              "attributes": {
+               "tnFvBDName": "AMF_BD"
+              }
+             }
+            }
+           ]
+          }
+         },
+         {
+          "fvAEPg": {
+           "attributes": {
+            "name": "SMF_EPG",
+            "descr": "SMF pods"
+           },
+           "children": [
+            {
+             "fvRsBd": {
+              "attributes": {
+               "tnFvBDName": "SMF_BD"
+              }
+             }
+            }
+           ]
+          }
+         },
+         {
+          "fvAEPg": {
+           "attributes": {
+            "name": "UPF_EPG",
+            "descr": "UPF pods"
+           },
+           "children": [
+            {
+             "fvRsBd": {
+              "attributes": {
+               "tnFvBDName": "UPF_BD"
+              }
+             }
+            }
+           ]
+          }
+         }
+        ]
+       }
+      },
+      {
+       "l3extOut": {
+        "attributes": {
+         "name": "5GC_L3OUT",
+         "descr": "N6 to PDN"
+        },
+        "children": [
+         {
+          "l3extRsEctx": {
+           "attributes": {
+            "tnFvCtxName": "5GC_VRF"
+           }
+          }
+         }
+        ]
+       }
+      }
+     ]
+    }
+   },
+   {
+    "fvTenant": {
+     "attributes": {
+      "dn": "uni/tn-VF-OSS",
+      "name": "VF-OSS",
+      "descr": "Operations support systems"
+     },
+     "children": [
+      {
+       "fvCtx": {
+        "attributes": {
+         "name": "OSS_VRF",
+         "pcEnfPref": "enforced",
+         "descr": ""
+        }
+       }
+      },
+      {
+       "fvBD": {
+        "attributes": {
+         "name": "OSS_BD",
+         "descr": "OSS platforms",
+         "unicastRoute": "yes",
+         "arpFlood": "no",
+         "unkMacUcastAct": "proxy"
+        },
+        "children": [
+         {
+          "fvRsCtx": {
+           "attributes": {
+            "tnFvCtxName": "OSS_VRF"
+           }
+          }
+         },
+         {
+          "fvSubnet": {
+           "attributes": {
+            "ip": "10.70.1.1/24",
+            "scope": "private"
+           }
+          }
+         }
+        ]
+       }
+      },
+      {
+       "fvAp": {
+        "attributes": {
+         "name": "OSS_AP",
+         "descr": "OSS"
+        },
+        "children": [
+         {
+          "fvAEPg": {
+           "attributes": {
+            "name": "MONITORING_EPG",
+            "descr": "Monitoring stack"
+           },
+           "children": [
+            {
+             "fvRsBd": {
+              "attributes": {
+               "tnFvBDName": "OSS_BD"
+              }
+             }
+            }
+           ]
+          }
+         },
+         {
+          "fvAEPg": {
+           "attributes": {
+            "name": "INVENTORY_EPG",
+            "descr": "Inventory"
+           },
+           "children": [
+            {
+             "fvRsBd": {
+              "attributes": {
+               "tnFvBDName": "OSS_BD"
+              }
+             }
+            }
+           ]
+          }
+         }
+        ]
+       }
+      }
+     ]
+    }
+   }
+  ],
+  "fabricNode": [
+   {
+    "fabricNode": {
+     "attributes": {
+      "dn": "topology/pod-1/node-1",
+      "id": "1",
+      "name": "vf-dc1-apic1",
+      "role": "controller",
+      "model": "APIC-SERVER-M4",
+      "serial": "WZP2401A01X",
+      "version": "6.0(5h)",
+      "fabricSt": "active"
+     }
+    }
+   },
+   {
+    "fabricNode": {
+     "attributes": {
+      "dn": "topology/pod-1/node-2",
+      "id": "2",
+      "name": "vf-dc1-apic2",
+      "role": "controller",
+      "model": "APIC-SERVER-M4",
+      "serial": "WZP2401A02X",
+      "version": "6.0(5h)",
+      "fabricSt": "active"
+     }
+    }
+   },
+   {
+    "fabricNode": {
+     "attributes": {
+      "dn": "topology/pod-1/node-3",
+      "id": "3",
+      "name": "vf-dc1-apic3",
+      "role": "controller",
+      "model": "APIC-SERVER-M4",
+      "serial": "WZP2401A03X",
+      "version": "6.0(5h)",
+      "fabricSt": "active"
+     }
+    }
+   },
+   {
+    "fabricNode": {
+     "attributes": {
+      "dn": "topology/pod-1/node-201",
+      "id": "201",
+      "name": "vf-dc1-spine201",
+      "role": "spine",
+      "model": "N9K-C9364D-GX2A",
+      "serial": "FDO2512S201Q",
+      "version": "n9000-16.0(5h)",
+      "fabricSt": "active"
+     }
+    }
+   },
+   {
+    "fabricNode": {
+     "attributes": {
+      "dn": "topology/pod-1/node-202",
+      "id": "202",
+      "name": "vf-dc1-spine202",
+      "role": "spine",
+      "model": "N9K-C9364D-GX2A",
+      "serial": "FDO2512S202Q",
+      "version": "n9000-16.0(5h)",
+      "fabricSt": "active"
+     }
+    }
+   },
+   {
+    "fabricNode": {
+     "attributes": {
+      "dn": "topology/pod-1/node-101",
+      "id": "101",
+      "name": "vf-dc1-leaf101",
+      "role": "leaf",
+      "model": "N9K-C93180YC-FX3",
+      "serial": "FDO2611L101K",
+      "version": "n9000-16.0(5h)",
+      "fabricSt": "active"
+     }
+    }
+   },
+   {
+    "fabricNode": {
+     "attributes": {
+      "dn": "topology/pod-1/node-102",
+      "id": "102",
+      "name": "vf-dc1-leaf102",
+      "role": "leaf",
+      "model": "N9K-C93180YC-FX3",
+      "serial": "FDO2611L102K",
+      "version": "n9000-16.0(5h)",
+      "fabricSt": "active"
+     }
+    }
+   },
+   {
+    "fabricNode": {
+     "attributes": {
+      "dn": "topology/pod-1/node-103",
+      "id": "103",
+      "name": "vf-dc1-leaf103",
+      "role": "leaf",
+      "model": "N9K-C93180YC-FX3",
+      "serial": "FDO2611L103K",
+      "version": "n9000-16.0(5h)",
+      "fabricSt": "active"
+     }
+    }
+   },
+   {
+    "fabricNode": {
+     "attributes": {
+      "dn": "topology/pod-1/node-104",
+      "id": "104",
+      "name": "vf-dc1-leaf104",
+      "role": "leaf",
+      "model": "N9K-C93180YC-FX3",
+      "serial": "FDO2611L104K",
+      "version": "n9000-16.0(5h)",
+      "fabricSt": "active"
+     }
+    }
+   },
+   {
+    "fabricNode": {
+     "attributes": {
+      "dn": "topology/pod-1/node-105",
+      "id": "105",
+      "name": "vf-dc1-bleaf105",
+      "role": "leaf",
+      "model": "N9K-C93180YC-FX3",
+      "serial": "FDO2611L105K",
+      "version": "n9000-16.0(5h)",
+      "fabricSt": "active",
+      "nodeType": "border-leaf"
+     }
+    }
+   },
+   {
+    "fabricNode": {
+     "attributes": {
+      "dn": "topology/pod-1/node-106",
+      "id": "106",
+      "name": "vf-dc1-bleaf106",
+      "role": "leaf",
+      "model": "N9K-C93180YC-FX3",
+      "serial": "FDO2611L106K",
+      "version": "n9000-16.0(5h)",
+      "fabricSt": "active",
+      "nodeType": "border-leaf"
+     }
+    }
+   }
+  ],
+  "topSystem": [
+   {
+    "topSystem": {
+     "attributes": {
+      "dn": "topology/pod-1/node-1/sys",
+      "id": "1",
+      "name": "vf-dc1-apic1",
+      "oobMgmtAddr": "172.16.100.11"
+     }
+    }
+   },
+   {
+    "topSystem": {
+     "attributes": {
+      "dn": "topology/pod-1/node-2/sys",
+      "id": "2",
+      "name": "vf-dc1-apic2",
+      "oobMgmtAddr": "172.16.100.12"
+     }
+    }
+   },
+   {
+    "topSystem": {
+     "attributes": {
+      "dn": "topology/pod-1/node-3/sys",
+      "id": "3",
+      "name": "vf-dc1-apic3",
+      "oobMgmtAddr": "172.16.100.13"
+     }
+    }
+   },
+   {
+    "topSystem": {
+     "attributes": {
+      "dn": "topology/pod-1/node-201/sys",
+      "id": "201",
+      "name": "vf-dc1-spine201",
+      "oobMgmtAddr": "172.16.100.20"
+     }
+    }
+   },
+   {
+    "topSystem": {
+     "attributes": {
+      "dn": "topology/pod-1/node-202/sys",
+      "id": "202",
+      "name": "vf-dc1-spine202",
+      "oobMgmtAddr": "172.16.100.21"
+     }
+    }
+   },
+   {
+    "topSystem": {
+     "attributes": {
+      "dn": "topology/pod-1/node-101/sys",
+      "id": "101",
+      "name": "vf-dc1-leaf101",
+      "oobMgmtAddr": "172.16.100.30"
+     }
+    }
+   },
+   {
+    "topSystem": {
+     "attributes": {
+      "dn": "topology/pod-1/node-102/sys",
+      "id": "102",
+      "name": "vf-dc1-leaf102",
+      "oobMgmtAddr": "172.16.100.31"
+     }
+    }
+   },
+   {
+    "topSystem": {
+     "attributes": {
+      "dn": "topology/pod-1/node-103/sys",
+      "id": "103",
+      "name": "vf-dc1-leaf103",
+      "oobMgmtAddr": "172.16.100.32"
+     }
+    }
+   },
+   {
+    "topSystem": {
+     "attributes": {
+      "dn": "topology/pod-1/node-104/sys",
+      "id": "104",
+      "name": "vf-dc1-leaf104",
+      "oobMgmtAddr": "172.16.100.33"
+     }
+    }
+   },
+   {
+    "topSystem": {
+     "attributes": {
+      "dn": "topology/pod-1/node-105/sys",
+      "id": "105",
+      "name": "vf-dc1-bleaf105",
+      "oobMgmtAddr": "172.16.100.34"
+     }
+    }
+   },
+   {
+    "topSystem": {
+     "attributes": {
+      "dn": "topology/pod-1/node-106/sys",
+      "id": "106",
+      "name": "vf-dc1-bleaf106",
+      "oobMgmtAddr": "172.16.100.35"
+     }
+    }
+   }
+  ],
+  "fabricLink": [
+   {
+    "fabricLink": {
+     "attributes": {
+      "dn": "topology/pod-1/lnkcnt-201/lnk-101-1-49-to-201-1-1",
+      "n1": "101",
+      "s1": "1",
+      "p1": "49",
+      "n2": "201",
+      "s2": "1",
+      "p2": "1",
+      "linkState": "ok",
+      "speed": "100G"
+     }
+    }
+   },
+   {
+    "fabricLink": {
+     "attributes": {
+      "dn": "topology/pod-1/lnkcnt-202/lnk-101-1-50-to-202-1-1",
+      "n1": "101",
+      "s1": "1",
+      "p1": "50",
+      "n2": "202",
+      "s2": "1",
+      "p2": "1",
+      "linkState": "ok",
+      "speed": "100G"
+     }
+    }
+   },
+   {
+    "fabricLink": {
+     "attributes": {
+      "dn": "topology/pod-1/lnkcnt-201/lnk-102-1-49-to-201-1-2",
+      "n1": "102",
+      "s1": "1",
+      "p1": "49",
+      "n2": "201",
+      "s2": "1",
+      "p2": "2",
+      "linkState": "ok",
+      "speed": "100G"
+     }
+    }
+   },
+   {
+    "fabricLink": {
+     "attributes": {
+      "dn": "topology/pod-1/lnkcnt-202/lnk-102-1-50-to-202-1-2",
+      "n1": "102",
+      "s1": "1",
+      "p1": "50",
+      "n2": "202",
+      "s2": "1",
+      "p2": "2",
+      "linkState": "ok",
+      "speed": "100G"
+     }
+    }
+   },
+   {
+    "fabricLink": {
+     "attributes": {
+      "dn": "topology/pod-1/lnkcnt-201/lnk-103-1-49-to-201-1-3",
+      "n1": "103",
+      "s1": "1",
+      "p1": "49",
+      "n2": "201",
+      "s2": "1",
+      "p2": "3",
+      "linkState": "ok",
+      "speed": "100G"
+     }
+    }
+   },
+   {
+    "fabricLink": {
+     "attributes": {
+      "dn": "topology/pod-1/lnkcnt-202/lnk-103-1-50-to-202-1-3",
+      "n1": "103",
+      "s1": "1",
+      "p1": "50",
+      "n2": "202",
+      "s2": "1",
+      "p2": "3",
+      "linkState": "ok",
+      "speed": "100G"
+     }
+    }
+   },
+   {
+    "fabricLink": {
+     "attributes": {
+      "dn": "topology/pod-1/lnkcnt-201/lnk-104-1-49-to-201-1-4",
+      "n1": "104",
+      "s1": "1",
+      "p1": "49",
+      "n2": "201",
+      "s2": "1",
+      "p2": "4",
+      "linkState": "ok",
+      "speed": "100G"
+     }
+    }
+   },
+   {
+    "fabricLink": {
+     "attributes": {
+      "dn": "topology/pod-1/lnkcnt-202/lnk-104-1-50-to-202-1-4",
+      "n1": "104",
+      "s1": "1",
+      "p1": "50",
+      "n2": "202",
+      "s2": "1",
+      "p2": "4",
+      "linkState": "ok",
+      "speed": "100G"
+     }
+    }
+   },
+   {
+    "fabricLink": {
+     "attributes": {
+      "dn": "topology/pod-1/lnkcnt-201/lnk-105-1-49-to-201-1-5",
+      "n1": "105",
+      "s1": "1",
+      "p1": "49",
+      "n2": "201",
+      "s2": "1",
+      "p2": "5",
+      "linkState": "ok",
+      "speed": "100G"
+     }
+    }
+   },
+   {
+    "fabricLink": {
+     "attributes": {
+      "dn": "topology/pod-1/lnkcnt-202/lnk-105-1-50-to-202-1-5",
+      "n1": "105",
+      "s1": "1",
+      "p1": "50",
+      "n2": "202",
+      "s2": "1",
+      "p2": "5",
+      "linkState": "ok",
+      "speed": "100G"
+     }
+    }
+   },
+   {
+    "fabricLink": {
+     "attributes": {
+      "dn": "topology/pod-1/lnkcnt-201/lnk-106-1-49-to-201-1-6",
+      "n1": "106",
+      "s1": "1",
+      "p1": "49",
+      "n2": "201",
+      "s2": "1",
+      "p2": "6",
+      "linkState": "ok",
+      "speed": "100G"
+     }
+    }
+   },
+   {
+    "fabricLink": {
+     "attributes": {
+      "dn": "topology/pod-1/lnkcnt-202/lnk-106-1-50-to-202-1-6",
+      "n1": "106",
+      "s1": "1",
+      "p1": "50",
+      "n2": "202",
+      "s2": "1",
+      "p2": "6",
+      "linkState": "down",
+      "speed": "100G"
+     }
+    }
+   },
+   {
+    "fabricLink": {
+     "attributes": {
+      "dn": "topology/pod-1/lnkcnt-101/lnk-1-1-1-to-101-1-48",
+      "n1": "1",
+      "s1": "1",
+      "p1": "1",
+      "n2": "101",
+      "s2": "1",
+      "p2": "48",
+      "linkState": "ok",
+      "speed": "25G"
+     }
+    }
+   },
+   {
+    "fabricLink": {
+     "attributes": {
+      "dn": "topology/pod-1/lnkcnt-102/lnk-2-1-1-to-102-1-48",
+      "n1": "2",
+      "s1": "1",
+      "p1": "1",
+      "n2": "102",
+      "s2": "1",
+      "p2": "48",
+      "linkState": "ok",
+      "speed": "25G"
+     }
+    }
+   },
+   {
+    "fabricLink": {
+     "attributes": {
+      "dn": "topology/pod-1/lnkcnt-103/lnk-3-1-1-to-103-1-48",
+      "n1": "3",
+      "s1": "1",
+      "p1": "1",
+      "n2": "103",
+      "s2": "1",
+      "p2": "48",
+      "linkState": "ok",
+      "speed": "25G"
+     }
+    }
+   }
+  ]
+ }
+}

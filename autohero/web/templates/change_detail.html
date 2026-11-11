@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block crumbs %}AutoHero / Changes / <span id="crumb-ref">…</span>{% endblock %}
+{% block heading %}<span id="cr-title">Change request</span>{% endblock %}
+{% block content %}
+<div class="card">
+  <div class="card-h" style="flex-wrap:wrap">
+    <span class="ref" id="cr-ref"></span><span id="cr-status"></span><span id="cr-risk"></span>
+    <span class="sub" id="cr-meta"></span>
+    <div class="right" id="cr-actions"></div>
+  </div>
+  <div class="stepper" id="stepper"></div>
+</div>
+
+<div class="grid g-main">
+  <div style="display:flex;flex-direction:column;gap:20px;min-width:0">
+    <div class="card">
+      <div class="card-h"><h2>Change preview</h2>
+        <div class="right"><div class="seg" id="view-seg"><button class="on" data-v="diff">Diff</button><button data-v="payload">APIC payload</button><button data-v="rollback">Rollback payload</button><button data-v="intent">Intent</button></div></div></div>
+      <div id="view-body"></div>
+    </div>
+    <div class="card hidden" id="post-card">
+      <div class="card-h"><h2>Post-checks</h2><span class="sub">Verified on a fresh snapshot after execution</span></div>
+      <div id="post-checks"></div>
+    </div>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:20px;min-width:0">
+    <div class="card">
+      <div class="card-h"><h2>Pre-checks</h2><span class="sub" id="chk-sum"></span></div>
+      <div id="checks"></div>
+    </div>
+    <div class="card">
+      <div class="card-h"><h2>Impact</h2></div>
+      <div class="card-b" id="impact"></div>
+    </div>
+    <div class="card">
+      <div class="card-h"><h2>Timeline</h2></div>
+      <div class="timeline" id="timeline"></div>
+    </div>
+  </div>
+</div>
+{% endblock %}
