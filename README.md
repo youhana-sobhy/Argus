@@ -54,14 +54,14 @@ Argus has a built-in presentation page about the application at **http://127.0.0
 
 ## Quick start
 
-> **Renamed from AutoHero.** The platform is now called **Argus**. The Python package is `argus`, the CLI is `argus`, and settings use the `ARGUS_` prefix (for example `ARGUS_LLM_PROVIDER`). If you have an older `.env`, replace `AUTOHERO_` with `ARGUS_` in it, and run `pip install -e .` again so the `argus` command is installed. The GitHub repository is still named `AutoHero` until it is renamed there.
+> **Renamed from AutoHero.** The platform is now called **Argus**. The Python package is `argus`, the CLI is `argus`, and settings use the `ARGUS_` prefix (for example `ARGUS_LLM_PROVIDER`). If you have an older `.env`, replace `AUTOHERO_` with `ARGUS_` in it, and run `pip install -e .` again so the `argus` command is installed. The GitHub repository is now `youhana-sobhy/Argus`. If you cloned the old `AutoHero` URL, run `git remote set-url origin https://github.com/youhana-sobhy/Argus.git`.
 
 
 ### Option A: Python (Windows, macOS or Linux)
 
 ```bash
-git clone https://github.com/youhana-sobhy/AutoHero.git
-cd AutoHero
+git clone https://github.com/youhana-sobhy/Argus.git
+cd Argus
 python -m venv .venv
 # Windows: .venv\Scripts\activate    macOS/Linux: source .venv/bin/activate
 pip install -e ".[dev]"
