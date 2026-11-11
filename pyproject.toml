@@ -3,9 +3,9 @@ requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "autohero"
+name = "argus"
 version = "0.1.0"
-description = "AutoHero - AI-assisted network automation platform (Cisco ACI MVP)"
+description = "Argus - AI-assisted network automation platform (Cisco ACI MVP)"
 readme = "README.md"
 requires-python = ">=3.11"
 license = { text = "Proprietary" }
@@ -27,13 +27,13 @@ postgres = ["psycopg[binary]>=3.2"]
 dev = ["pytest>=8", "anthropic>=2.8", "openai>=3.0"]
 
 [project.scripts]
-autohero = "autohero.cli:main"
+argus = "argus.cli:main"
 
 [tool.setuptools.packages.find]
-include = ["autohero*"]
+include = ["argus*"]
 
 [tool.setuptools.package-data]
-autohero = ["web/templates/*.html", "web/static/**/*", "data/mock/*.json"]
+argus = ["web/templates/*.html", "web/static/**/*", "data/mock/*.json"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

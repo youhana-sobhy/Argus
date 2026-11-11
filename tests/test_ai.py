@@ -1,9 +1,9 @@
 """Redaction, proposal extraction and provider switching."""
 
-from autohero.ai.assistant import Assistant, extract_proposal
-from autohero.ai.providers import LLMProvider, LLMReply
-from autohero.ai.redaction import Redactor
-from autohero.core.inventory import get_inventory
+from argus.ai.assistant import Assistant, extract_proposal
+from argus.ai.providers import LLMProvider, LLMReply
+from argus.ai.redaction import Redactor
+from argus.core.inventory import get_inventory
 
 
 def test_redaction_roundtrip():
@@ -16,7 +16,7 @@ def test_redaction_roundtrip():
 
 
 def test_extract_proposal():
-    text = 'Sure.\n```autohero-change\n{"kind":"delete_object","tenant":"VF-5GC","object_type":"bridge_domain","name":"LEGACY_BD"}\n```'
+    text = 'Sure.\n```argus-change\n{"kind":"delete_object","tenant":"VF-5GC","object_type":"bridge_domain","name":"LEGACY_BD"}\n```'
     clean, prop = extract_proposal(text)
     assert clean == "Sure." and prop["name"] == "LEGACY_BD"
 

@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Argus · Executive overview</title>
+<link rel="icon" href="/static/img/logo-mark.svg" type="image/svg+xml">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --red:#E3051B;--ember:#A8001B;--blush:#FFF1F2;--graphite:#17191C;--ink:#1B1F23;--slate:#5E656C;
+  --mist:#E7E9EC;--cloud:#F5F6F7;--white:#fff;--green:#0E8A5F;--amber:#B86E00;--blue:#1F63C9;--violet:#6A43C9;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);background:var(--white);line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1160px;margin:0 auto;padding:0 28px}
+.over{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--red)}
+h1,h2,h3{letter-spacing:-.02em;color:var(--graphite)}
+h2{font-size:clamp(28px,3.6vw,42px);font-weight:800;line-height:1.12;margin:10px 0 14px}
+.sub{font-size:18px;color:var(--slate);max-width:720px}
+section{padding:96px 0}
+
+/* top bar */
+.bar{position:fixed;inset:0 0 auto 0;z-index:20;background:rgba(23,25,28,.82);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.08)}
+.bar .wrap{display:flex;align-items:center;justify-content:space-between;height:62px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:20px;color:#fff;letter-spacing:-.02em}
+.logo img{width:32px;height:32px;border-radius:8px;background:#fff;padding:1px}
+.logo span{color:var(--red)}
+.nav{display:flex;gap:26px;font-size:14px;font-weight:600;color:rgba(255,255,255,.75)}
+.nav a:hover{color:#fff}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:999px;font-weight:700;font-size:15px;transition:transform .15s,box-shadow .15s,background .15s}
+.btn.red{background:var(--red);color:#fff;box-shadow:0 10px 30px -10px rgba(227,5,27,.7)}
+.btn.red:hover{background:var(--ember);transform:translateY(-1px)}
+.btn.ghost{border:1.5px solid rgba(255,255,255,.35);color:#fff}
+.btn.ghost:hover{background:rgba(255,255,255,.08)}
+.bar .btn{padding:8px 16px;font-size:13px}
+
+/* hero */
+.hero{position:relative;overflow:hidden;background:radial-gradient(1200px 600px at 85% -10%,rgba(227,5,27,.45),transparent 60%),radial-gradient(900px 500px at -10% 110%,rgba(168,0,27,.35),transparent 60%),var(--graphite);color:#fff;padding:170px 0 120px}
+.hero h1{color:#fff;font-size:clamp(40px,6vw,76px);font-weight:800;line-height:1.02;max-width:860px}
+.hero h1 em{font-style:normal;background:linear-gradient(90deg,#ff3b4e,var(--red));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p.lead{font-size:20px;color:rgba(255,255,255,.78);max-width:640px;margin:24px 0 36px}
+.hero .ctas{display:flex;gap:14px;flex-wrap:wrap}
+.hero .tag{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);font-size:13px;font-weight:600;margin-bottom:26px}
+.hero .tag i{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 0 4px rgba(14,138,95,.25)}
+.net{position:absolute;right:-60px;top:110px;width:560px;opacity:.55;pointer-events:none}
+.net circle{fill:var(--graphite);stroke:#fff;stroke-width:1.5}
+.net circle.hot{fill:var(--red);stroke:var(--red)}
+.net path{stroke:rgba(255,255,255,.35);stroke-width:1.3;fill:none;stroke-dasharray:4 6;animation:flow 6s linear infinite}
+@keyframes flow{to{stroke-dashoffset:-100}}
+.pulse{animation:pulse 2.4s ease-in-out infinite;transform-origin:center;transform-box:fill-box}
+@keyframes pulse{50%{transform:scale(1.35);opacity:.7}}
+
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;margin-top:80px;background:rgba(255,255,255,.1);border-radius:18px;overflow:hidden;border:1px solid rgba(255,255,255,.1)}
+.kpis div{background:rgba(23,25,28,.6);padding:24px 26px}
+.kpis b{display:block;font-size:34px;font-weight:800;color:#fff;letter-spacing:-.02em}
+.kpis span{font-size:14px;color:rgba(255,255,255,.65)}
+
+/* problem */
+.problem{background:var(--cloud)}
+.pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:44px}
+.pcard{background:#fff;border:1px solid var(--mist);border-radius:18px;padding:28px}
+.pcard .ic{width:44px;height:44px;border-radius:12px;background:var(--blush);color:var(--red);display:grid;place-items:center;margin-bottom:16px}
+.pcard h3{font-size:18px;margin-bottom:6px}
+.pcard p{color:var(--slate);font-size:15px}
+
+/* pillars */
+.pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:48px}
+.pillar{position:relative;border-radius:22px;padding:34px 30px 30px;background:#fff;border:1px solid var(--mist);box-shadow:0 20px 50px -30px rgba(23,25,28,.35);transition:transform .25s,box-shadow .25s;overflow:hidden}
+.pillar:hover{transform:translateY(-6px);box-shadow:0 30px 60px -30px rgba(23,25,28,.45)}
+.pillar::before{content:"";position:absolute;inset:0 0 auto 0;height:5px;background:var(--c)}
+.pillar .num{font-size:13px;font-weight:800;color:var(--c);letter-spacing:.12em}
+.pillar h3{font-size:26px;font-weight:800;margin:8px 0 10px}
+.pillar p{color:var(--slate);margin-bottom:18px}
+.pillar ul{list-style:none;display:grid;gap:9px}
+.pillar li{display:flex;gap:10px;font-size:15px;font-weight:500}
+.pillar li::before{content:"";flex:none;width:18px;height:18px;margin-top:2px;border-radius:50%;background:var(--c) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12l5 5 9-10'/%3E%3C/svg%3E") center/11px no-repeat}
+
+/* flow */
+.flowsec{background:var(--graphite);color:#fff}
+.flowsec h2{color:#fff}
+.flowsec .sub{color:rgba(255,255,255,.7)}
+.steps{display:grid;grid-template-columns:repeat(6,1fr);gap:0;margin-top:56px;position:relative}
+.steps::before{content:"";position:absolute;left:8%;right:8%;top:34px;height:2px;background:linear-gradient(90deg,var(--blue),var(--violet),var(--red),var(--green))}
+.step{text-align:center;padding:0 10px;position:relative}
+.step .dot{width:68px;height:68px;margin:0 auto 18px;border-radius:50%;display:grid;place-items:center;background:var(--graphite);border:2px solid var(--c);color:#fff;font-weight:800;font-size:20px;box-shadow:0 0 0 8px var(--graphite),0 0 30px -4px var(--c)}
+.step h4{font-size:16px;font-weight:700;margin-bottom:6px}
+.step p{font-size:13.5px;color:rgba(255,255,255,.65)}
+.who{display:inline-block;margin-top:10px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:4px 10px;border-radius:999px;background:rgba(255,255,255,.08);color:rgba(255,255,255,.8)}
+.rollback{margin:44px auto 0;max-width:760px;text-align:center;padding:18px 24px;border-radius:14px;border:1px dashed rgba(255,255,255,.25);color:rgba(255,255,255,.8);font-size:15px}
+.rollback b{color:#fff}
+
+/* AI */
+.ai{display:grid;grid-template-columns:1.05fr 1fr;gap:56px;align-items:center}
+.chat{background:var(--cloud);border:1px solid var(--mist);border-radius:22px;padding:24px;box-shadow:0 30px 60px -35px rgba(23,25,28,.4)}
+.msg{max-width:88%;padding:13px 16px;border-radius:16px;font-size:14.5px;margin-bottom:12px}
+.msg.u{margin-left:auto;background:var(--graphite);color:#fff;border-bottom-right-radius:4px}
+.msg.a{background:#fff;border:1px solid var(--mist);border-bottom-left-radius:4px}
+.msg.a b{color:var(--graphite)}
+.mask{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:12.5px;background:rgba(106,67,201,.1);color:var(--violet);padding:1px 6px;border-radius:6px}
+.draft{margin-top:10px;padding:12px 14px;border-radius:12px;background:var(--blush);color:var(--ember);font-weight:600;font-size:13.5px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.draft span{background:var(--red);color:#fff;border-radius:999px;padding:5px 12px;font-size:12px;white-space:nowrap}
+.points{display:grid;gap:18px;margin-top:28px}
+.point{display:flex;gap:16px}
+.point .ic{flex:none;width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:color-mix(in srgb,var(--c) 12%,white);color:var(--c)}
+.point h4{font-size:16.5px;margin-bottom:2px;color:var(--graphite)}
+.point p{color:var(--slate);font-size:15px}
+
+/* safety */
+.safety{background:var(--cloud)}
+.sgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:44px}
+.scard{background:#fff;border-radius:18px;padding:24px;border:1px solid var(--mist)}
+.scard .ic{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:var(--graphite);color:#fff;margin-bottom:14px}
+.scard h4{font-size:16px;margin-bottom:4px;color:var(--graphite)}
+.scard p{font-size:14px;color:var(--slate)}
+
+/* value */
+.vgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:44px}
+.vcard{padding:28px 24px;border-radius:20px;background:linear-gradient(160deg,var(--blush),#fff 70%);border:1px solid #ffd9dd}
+.vcard b{display:block;font-size:22px;font-weight:800;color:var(--ember);letter-spacing:-.01em;margin-bottom:6px}
+.vcard p{font-size:14.5px;color:var(--slate)}
+
+/* roadmap */
+.road{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:44px}
+.phase{border-radius:18px;padding:24px;border:1px solid var(--mist);background:#fff;position:relative}
+.phase.now{background:var(--graphite);color:#fff;border-color:var(--graphite)}
+.phase.now h4,.phase.now li{color:#fff}
+.phase .ph{font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--red)}
+.phase h4{font-size:18px;margin:6px 0 12px;color:var(--graphite)}
+.phase ul{list-style:none;display:grid;gap:7px}
+.phase li{font-size:14px;color:var(--slate);padding-left:14px;position:relative}
+.phase li::before{content:"";position:absolute;left:0;top:9px;width:6px;height:6px;border-radius:50%;background:var(--red)}
+.badge{position:absolute;top:20px;right:20px;font-size:11px;font-weight:700;padding:4px 10px;border-radius:999px;background:var(--green);color:#fff}
+.vendors{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+.vendors span{padding:8px 16px;border-radius:999px;border:1px solid var(--mist);font-weight:600;font-size:14px;color:var(--slate);background:#fff}
+.vendors span.on{background:var(--red);color:#fff;border-color:var(--red)}
+
+/* cta */
+.cta{background:linear-gradient(135deg,var(--red),var(--ember));color:#fff;text-align:center;padding:90px 0}
+.cta h2{color:#fff}
+.cta p{color:rgba(255,255,255,.85);font-size:18px;margin-bottom:30px}
+.cta .btn.white{background:#fff;color:var(--ember)}
+.cta .btn.white:hover{transform:translateY(-1px)}
+footer{background:var(--graphite);color:rgba(255,255,255,.55);font-size:13px;padding:26px 0}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}.net path,.pulse{animation:none}}
+
+@media (max-width:960px){
+  .nav{display:none}
+  .pgrid,.pillars,.ai{grid-template-columns:1fr}
+  .sgrid,.vgrid,.road,.kpis{grid-template-columns:repeat(2,1fr)}
+  .steps{grid-template-columns:repeat(3,1fr);row-gap:40px}
+  .steps::before{display:none}
+  .net{display:none}
+}
+@media (max-width:560px){
+  .wrap{padding:0 16px}
+  section{padding:70px 0}
+  .sgrid,.vgrid,.road,.kpis{grid-template-columns:1fr}
+  .steps{grid-template-columns:repeat(2,1fr)}
+  .bar .btn{display:none}
+}
+@media print{.bar{display:none}.rv{opacity:1;transform:none}section{padding:48px 0;break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <div class="wrap">
+    <a class="logo" href="#top"><img src="/static/img/logo-mark.svg" alt="">Argus</a>
+    <nav class="nav">
+      <a href="#why">Why</a><a href="#what">What it does</a><a href="#how">How a change flows</a><a href="#ai">AI</a><a href="#safety">Safety</a><a href="#next">Roadmap</a>
+    </nav>
+    <a class="btn red" href="/login">Open live demo</a>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <svg class="net" viewBox="0 0 400 320" aria-hidden="true">
+    <path d="M200 40 90 140M200 40l110 100M90 140l-40 120M90 140l60 120M310 140l-60 120M310 140l40 120M90 140h220M150 260h100"/>
+    <circle class="hot pulse" cx="200" cy="40" r="12"/>
+    <circle cx="90" cy="140" r="10"/><circle cx="310" cy="140" r="10"/>
+    <circle cx="50" cy="260" r="8"/><circle cx="150" cy="260" r="8"/><circle cx="250" cy="260" r="8"/><circle cx="350" cy="260" r="8"/>
+  </svg>
+  <div class="wrap">
+    <div class="tag"><i></i>MVP ready · Cisco ACI</div>
+    <h1>Your network, <em>understood</em> and changed <em>safely</em>.</h1>
+    <p class="lead">Argus reads the whole data center fabric, explains it in plain language, and runs approved changes with automatic checks, a second pair of eyes and a one-click way back.</p>
+    <div class="ctas">
+      <a class="btn red" href="/login">See it live</a>
+      <a class="btn ghost" href="#what">What it does</a>
+    </div>
+    <div class="kpis">
+      <div><b>1 view</b><span>of the full fabric config and state</span></div>
+      <div><b>9 checks</b><span>run automatically before any change</span></div>
+      <div><b>2 people</b><span>on every change: one requests, another approves</span></div>
+      <div><b>1 click</b><span>to roll back to the exact previous state</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="problem" id="why">
+  <div class="wrap">
+    <div class="over rv">The challenge</div>
+    <h2 class="rv">Network changes are slow and risky today.</h2>
+    <p class="sub rv">The knowledge needed to make a safe change is spread across controllers, command lines and people's heads.</p>
+    <div class="pgrid">
+      <div class="pcard rv"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg></div><h3>Hard to see</h3><p>Engineers spend time hunting through screens to answer simple questions about what is configured and what is broken.</p></div>
+      <div class="pcard rv"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg></div><h3>Risky to change</h3><p>A single wrong change can affect live services. Checks depend on who is doing the work that day.</p></div>
+      <div class="pcard rv"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><h3>Slow to approve</h3><p>Reviews happen over email and chat, with no single record of who checked what and when.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="what">
+  <div class="wrap">
+    <div class="over rv">What Argus does</div>
+    <h2 class="rv">Three things, done well.</h2>
+    <p class="sub rv">One platform that sees the network, explains it, and changes it under control.</p>
+    <div class="pillars">
+      <div class="pillar rv" style="--c:var(--blue)">
+        <div class="num">01 · SEE</div><h3>Ingest</h3>
+        <p>Collects the full configuration and live state of the fabric into one clear model.</p>
+        <ul><li>Every switch, link, tenant and network</li><li>Physical and logical topology maps</li><li>Export to standard formats at any time</li></ul>
+      </div>
+      <div class="pillar rv" style="--c:var(--violet)">
+        <div class="num">02 · UNDERSTAND</div><h3>Ask</h3>
+        <p>Engineers chat with the network in plain English and get exact answers.</p>
+        <ul><li>"Which networks are unused?"</li><li>"Are any links down?"</li><li>Sensitive data is masked before AI sees it</li></ul>
+      </div>
+      <div class="pillar rv" style="--c:var(--red)">
+        <div class="num">03 · CHANGE</div><h3>Act</h3>
+        <p>Changes follow one governed path, from request to verified result.</p>
+        <ul><li>Automatic checks before anything runs</li><li>A second person must approve</li><li>Verified after, rolled back if needed</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="flowsec" id="how">
+  <div class="wrap">
+    <div class="over rv">How a change flows</div>
+    <h2 class="rv">From request to verified result, with no shortcuts.</h2>
+    <p class="sub rv">Every change follows the same path. Nothing reaches the network without passing each step.</p>
+    <div class="steps">
+      <div class="step rv" style="--c:var(--blue)"><div class="dot">1</div><h4>Request</h4><p>Typed in a form or drafted by the AI assistant</p><span class="who">Engineer</span></div>
+      <div class="step rv" style="--c:var(--blue)"><div class="dot">2</div><h4>Dry-run</h4><p>9 automatic checks on a copy of the network</p><span class="who">Argus</span></div>
+      <div class="step rv" style="--c:var(--violet)"><div class="dot">3</div><h4>Approve</h4><p>A different person reviews and signs off</p><span class="who">Approver</span></div>
+      <div class="step rv" style="--c:var(--red)"><div class="dot">4</div><h4>Execute</h4><p>Re-checked for last-minute changes, then applied</p><span class="who">Engineer</span></div>
+      <div class="step rv" style="--c:var(--green)"><div class="dot">5</div><h4>Verify</h4><p>Post-checks confirm the result on the live state</p><span class="who">Argus</span></div>
+      <div class="step rv" style="--c:var(--green)"><div class="dot">6</div><h4>Record</h4><p>Every step is written to the audit log</p><span class="who">Always</span></div>
+    </div>
+    <div class="rollback rv">If a post-check fails, Argus <b>rolls back automatically</b>. After a successful change, a <b>one-click rollback</b> is always available.</div>
+  </div>
+</section>
+
+<section id="ai">
+  <div class="wrap ai">
+    <div class="chat rv" aria-label="Example conversation">
+      <div class="msg u">Which bridge domains are not used?</div>
+      <div class="msg a"><b>LEGACY_BD</b> in tenant VF-5GC has no workloads attached. Its gateway <span class="mask">&lt;IP_7&gt;</span> can be retired after review.</div>
+      <div class="msg u">Create a bridge domain CACHE_BD in VF-CORE on PROD_VRF.</div>
+      <div class="msg a">Here is a draft. It will be dry-run, then needs approval by a second person before it can run.
+        <div class="draft">Create bridge domain CACHE_BD<span>Draft &amp; dry-run</span></div>
+      </div>
+    </div>
+    <div>
+      <div class="over rv">AI assistant</div>
+      <h2 class="rv">An expert that explains, but never acts alone.</h2>
+      <div class="points">
+        <div class="point rv" style="--c:var(--violet)"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><div><h4>Answers from real data</h4><p>It only answers from the collected network inventory, with exact object names.</p></div></div>
+        <div class="point rv" style="--c:var(--red)"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div><div><h4>Private by design</h4><p>IP addresses, serial numbers and secrets are masked before anything is sent to an AI model.</p></div></div>
+        <div class="point rv" style="--c:var(--green)"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div><h4>Drafts only</h4><p>The AI can suggest a change, but it always goes through checks and human approval.</p></div></div>
+        <div class="point rv" style="--c:var(--blue)"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M16 3h5v5M8 21H3v-5M21 3l-7 7M3 21l7-7"/></svg></div><div><h4>Flexible provider</h4><p>Works offline, with Claude, or with Azure OpenAI. Switching is a single setting.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="safety" id="safety">
+  <div class="wrap">
+    <div class="over rv">Built-in safety</div>
+    <h2 class="rv">Guardrails that never switch off.</h2>
+    <div class="sgrid">
+      <div class="scard rv"><div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="9" cy="8" r="3.5"/><circle cx="17" cy="9" r="2.5"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6M15 14.5c3 0 6 2 6 5.5"/></svg></div><h4>Four-eyes rule</h4><p>Nobody can approve their own change, not even an admin.</p></div>
+      <div class="scard rv"><div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M9 11l3 3 8-8"/><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h9"/></svg></div><h4>Blocks unsafe changes</h4><p>For example, deleting a network that is still in use is stopped at dry-run.</p></div>
+      <div class="scard rv"><div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg></div><h4>Always a way back</h4><p>Every change stores the exact steps to restore the previous state.</p></div>
+      <div class="scard rv"><div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h5"/></svg></div><h4>Full audit trail</h4><p>Who did what, when and with which result, ready for compliance.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="value">
+  <div class="wrap">
+    <div class="over rv">Business value</div>
+    <h2 class="rv">What this means for the team.</h2>
+    <div class="vgrid">
+      <div class="vcard rv"><b>Faster</b><p>Questions that took screen-hunting are answered in seconds. Standard changes are prepared in minutes.</p></div>
+      <div class="vcard rv"><b>Safer</b><p>The same checks run every time, no matter who makes the change.</p></div>
+      <div class="vcard rv"><b>Accountable</b><p>Every action is recorded and every change has a named approver.</p></div>
+      <div class="vcard rv"><b>Scalable</b><p>One platform and one process, ready to extend to more vendors.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="safety" id="next">
+  <div class="wrap">
+    <div class="over rv">Roadmap</div>
+    <h2 class="rv">Starting with Cisco ACI. Built for the whole network.</h2>
+    <div class="road">
+      <div class="phase now rv"><span class="badge">Done</span><div class="ph">MVP</div><h4>Cisco ACI</h4><ul><li>Full fabric visibility</li><li>AI assistant</li><li>3 governed change types</li><li>Lab environment for demos</li></ul></div>
+      <div class="phase rv"><div class="ph">Phase 2</div><h4>Production ready</h4><ul><li>Connect a real APIC lab</li><li>Company single sign-on</li><li>ServiceNow change records</li><li>Change windows</li></ul></div>
+      <div class="phase rv"><div class="ph">Phase 3</div><h4>More vendors</h4><ul><li>Cisco NX-OS</li><li>FortiGate and Palo Alto</li><li>More change types</li></ul></div>
+      <div class="phase rv"><div class="ph">Phase 4</div><h4>Self-healing</h4><ul><li>Juniper and VMware</li><li>Detect drift automatically</li><li>Propose or fix low-risk issues</li></ul></div>
+    </div>
+    <div class="vendors rv"><span class="on">Cisco ACI</span><span>Cisco NX-OS</span><span>FortiGate</span><span>Palo Alto</span><span>Juniper</span><span>VMware</span></div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="wrap">
+    <h2 class="rv">See it working in five minutes.</h2>
+    <p class="rv">Ask the network a question, draft a change, approve it and roll it back.</p>
+    <a class="btn white rv" href="/login">Open the live demo</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap"><span>Argus · Network automation platform · v{{ system.version }}</span><span>Lab data shown in the demo is fictional.</span></div>
+</footer>
+
+<script>
+(function(){
+  var els=document.querySelectorAll('.rv');
+  if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return;}
+  var io=new IntersectionObserver(function(entries){entries.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}})},{threshold:.12});
+  els.forEach(function(e,i){e.style.transitionDelay=(i%4)*70+'ms';io.observe(e)});
+})();
+</script>
+</body>
+</html>

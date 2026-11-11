@@ -1,9 +1,9 @@
 """Planner, mock APIC and rollback behaviour."""
 
-from autohero.changes import planner
-from autohero.changes.intents import parse_intent
-from autohero.connectors import aci_mo
-from autohero.core.inventory import get_inventory
+from argus.changes import planner
+from argus.changes.intents import parse_intent
+from argus.connectors import aci_mo
+from argus.core.inventory import get_inventory
 
 
 def _plan(data):

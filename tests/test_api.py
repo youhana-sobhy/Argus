@@ -70,4 +70,4 @@ def test_present_page_is_public(app):
 
     with TestClient(app) as c:
         r = c.get("/present", follow_redirects=False)
-        assert r.status_code == 200 and "AutoHero" in r.text
+        assert r.status_code == 200 and "Argus" in r.text

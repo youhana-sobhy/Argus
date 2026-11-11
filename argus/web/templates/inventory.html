@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="grid g-main">
+  <div class="card">
+    <div class="card-h"><h2>Tenant explorer</h2><span class="sub" id="inv-meta"></span>
+      <div class="right"><input class="input" id="inv-search" placeholder="Search objects, subnets…" style="width:240px;padding:7px 11px"></div></div>
+    <div class="card-b" id="tenants"><div class="empty">Loading…</div></div>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:20px">
+    <div class="card">
+      <div class="card-h"><h2>Collect &amp; export</h2></div>
+      <div class="card-b" style="display:flex;flex-direction:column;gap:12px">
+        <p class="muted small" style="margin:0">Re-collect the full configuration and state from the controller, or export it. Exports are recorded in the audit log.</p>
+        {% if 'inventory.sync' in user.permissions %}<button class="btn primary" id="sync">{{ icon('refresh') }}Re-collect from fabric</button>{% endif %}
+        {% if 'inventory.export' in user.permissions %}
+        <a class="btn" href="/api/inventory/export?format=normalized">{{ icon('download') }}Normalized JSON (Argus model)</a>
+        <a class="btn" href="/api/inventory/export?format=apic">{{ icon('download') }}APIC JSON (ready to re-import)</a>
+        <a class="btn" href="/api/inventory/export?format=native">{{ icon('download') }}Raw controller export</a>
+        {% else %}<p class="small muted">Your role can view but not export.</p>{% endif %}
+        {% if 'admin.lab_reset' in user.permissions and not system.live %}
+        <button class="btn danger-outline" id="lab-reset">{{ icon('undo') }}Reset mock lab to seed</button>{% endif %}
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-h"><h2>Fabric nodes</h2></div>
+      <div class="card-b flush"><table class="t"><thead><tr><th>Node</th><th>Role</th><th>Model</th><th>Status</th></tr></thead><tbody id="nodes"></tbody></table></div>
+    </div>
+  </div>
+</div>
+{% endblock %}

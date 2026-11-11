@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/brand/autohero-logo-horizontal.svg" width="420" alt="AutoHero">
+  <img src="docs/brand/argus-logo-horizontal.svg" width="420" alt="Argus">
 </p>
 
 <p align="center">
@@ -16,13 +16,13 @@
   <img alt="Deploy" src="https://img.shields.io/badge/deploy-Docker%20Compose%20on--prem-1F63C9">
 </p>
 
-<p align="center"><img src="docs/screenshots/02-overview.png" width="92%" alt="AutoHero overview"></p>
+<p align="center"><img src="docs/screenshots/02-overview.png" width="92%" alt="Argus overview"></p>
 
 ---
 
-## Why AutoHero
+## Why Argus
 
-Network changes in a large data center fabric are slow and risky because the knowledge is spread over controllers, CLI sessions and people's heads. AutoHero brings it together:
+Network changes in a large data center fabric are slow and risky because the knowledge is spread over controllers, CLI sessions and people's heads. Argus brings it together:
 
 | Capability | What it does for the engineer |
 |---|---|
@@ -35,13 +35,13 @@ The MVP targets **Cisco ACI**. The connector design is ready for NX-OS, FortiGat
 
 ## Executive presentation: `/present`
 
-AutoHero has a built-in presentation page about the application at **http://127.0.0.1:8000/present** (or `http://<host>:8000/present` on a server).
+Argus has a built-in presentation page about the application at **http://127.0.0.1:8000/present** (or `http://<host>:8000/present` on a server).
 
 - **Who it's for:** managers and senior leadership. It explains the platform in plain, non-technical language.
 - **What it covers:** the problem, the three capabilities (Ingest, Ask, Act), how a change flows from request to verified result, how the AI keeps data private, the safety guardrails, the business value and the roadmap.
 - **Access:** public. It needs no login and shows no network data, so it's safe to put on a meeting-room screen.
 - **How to use it in a demo:** open it first as your opening slide, scroll through it, then click **Open live demo** to go to the sign-in page.
-- **Source:** `autohero/web/templates/present.html` (route in `autohero/main.py`).
+- **Source:** `argus/web/templates/present.html` (route in `argus/main.py`).
 
 ## Screenshots
 
@@ -54,6 +54,9 @@ AutoHero has a built-in presentation page about the application at **http://127.
 
 ## Quick start
 
+> **Renamed from AutoHero.** The platform is now called **Argus**. The Python package is `argus`, the CLI is `argus`, and settings use the `ARGUS_` prefix (for example `ARGUS_LLM_PROVIDER`). If you have an older `.env`, replace `AUTOHERO_` with `ARGUS_` in it, and run `pip install -e .` again so the `argus` command is installed. The GitHub repository is still named `AutoHero` until it is renamed there.
+
+
 ### Option A: Python (Windows, macOS or Linux)
 
 ```bash
@@ -63,7 +66,7 @@ python -m venv .venv
 # Windows: .venv\Scripts\activate    macOS/Linux: source .venv/bin/activate
 pip install -e ".[dev]"
 cp .env.example .env          # optional: adjust settings
-autohero serve                # http://127.0.0.1:8000  (executive overview: /present)
+argus serve                # http://127.0.0.1:8000  (executive overview: /present)
 ```
 
 ### Option B: Docker Compose (on-prem)
@@ -73,11 +76,11 @@ cp .env.example .env
 docker compose up -d --build  # http://<host>:8000
 ```
 
-Add PostgreSQL with `docker compose --profile postgres up -d` and set `AUTOHERO_DATABASE_URL=postgresql+psycopg://autohero:<pw>@db:5432/autohero` in `.env`. For this, the image also needs `pip install ".[postgres]"`.
+Add PostgreSQL with `docker compose --profile postgres up -d` and set `ARGUS_DATABASE_URL=postgresql+psycopg://argus:<pw>@db:5432/argus` in `.env`. For this, the image also needs `pip install ".[postgres]"`.
 
 ### Demo accounts
 
-All of them use the password in `AUTOHERO_DEMO_PASSWORD`. The default in `.env.example` is `AutoHero-Demo-2026`. **Change it before you share the instance.**
+All of them use the password in `ARGUS_DEMO_PASSWORD`. The default in `.env.example` is `Argus-Demo-2026`. **Change it before you share the instance.**
 
 | User | Role | Can |
 |---|---|---|
@@ -88,14 +91,14 @@ All of them use the password in `AUTOHERO_DEMO_PASSWORD`. The default in `.env.e
 
 ## Five-minute demo script (for management)
 
-> **Executive overview page:** open **http://127.0.0.1:8000/present** first. It is a one-page, non-technical summary of what AutoHero does, made for managers. It needs no login and shows no fabric data. Use it as the opening slide, then click **Open live demo**.
+> **Executive overview page:** open **http://127.0.0.1:8000/present** first. It is a one-page, non-technical summary of what Argus does, made for managers. It needs no login and shows no fabric data. Use it as the opening slide, then click **Open live demo**.
 
 1. **Sign in as `engineer`.** The overview shows fabric health, open changes and a down link that needs attention.
 2. **Topology:** click `bleaf106` to see the down uplink to `spine202`. Switch to **Logical**, pick `VF-5GC` and notice that `LEGACY_BD` is flagged as unused.
 3. **Assistant:** ask *"Which bridge domains are unused?"*, then *"Create a bridge domain called CACHE_BD in VF-CORE on PROD_VRF with subnet 10.10.40.1/24"*, and click **Create draft & run dry-run**.
 4. **Change request:** walk through the **9 pre-checks**, the **diff**, the **APIC payload** and the **rollback payload**. Then **Submit for approval**.
 5. **Sign out and sign in as `approver`.** Open the change and **Approve** it. (Approving your own change is blocked by the four-eyes rule.)
-6. **Sign in as `engineer` again** and click **Execute**. AutoHero re-checks for drift, pushes the change and verifies it with post-checks. Then show **Roll back**.
+6. **Sign in as `engineer` again** and click **Execute**. Argus re-checks for drift, pushes the change and verifies it with post-checks. Then show **Roll back**.
 7. **Safety net:** try *Delete AMF_BD*. The dry-run is **blocked** because EPGs still use it.
 8. **Audit log** (as approver): every step is recorded.
 
@@ -109,10 +112,10 @@ These were agreed before the build and are detailed in [docs/ARCHITECTURE.md §2
 |---|---|
 | First vendor | **Cisco ACI**. Other vendors are on the roadmap behind the same connector interface |
 | Demo change types | **Create Application Profile**, **create Bridge Domain**, **delete object** (BD / AP / EPG) |
-| Lab | **Mock ACI fabric** in native APIC JSON. The **real APIC REST connector** is ready (`AUTOHERO_CONNECTOR=apic`) |
+| Lab | **Mock ACI fabric** in native APIC JSON. The **real APIC REST connector** is ready (`ARGUS_CONNECTOR=apic`) |
 | Data format | **Normalized JSON** model, plus APIC JSON and raw exports |
 | AI provider | **Anthropic Claude first**. **Azure OpenAI** is one setting away (planned once the Azure key is issued). **Offline** mode is the demo default |
-| AI data protection | **Masking** of IPs, serials and secrets before any LLM call (`AUTOHERO_REDACT=true`) |
+| AI data protection | **Masking** of IPs, serials and secrets before any LLM call (`ARGUS_REDACT=true`) |
 | UI | **FastAPI web app** with a polished, branded UX. Topology graph included |
 | Change flow | **Draft → dry-run → approval by a second user → execute → post-checks → rollback** |
 | ITSM | **None in the MVP**. A hook point is ready for ServiceNow |
@@ -130,27 +133,27 @@ All settings are environment variables (or `.env`). See [`.env.example`](.env.ex
 
 | Variable | Default | Meaning |
 |---|---|---|
-| `AUTOHERO_CONNECTOR` | `mock` | `mock` (built-in ACI lab) or `apic` (real controller) |
-| `AUTOHERO_APIC_URL` / `_USERNAME` / `_PASSWORD` | – | APIC credentials (use a dedicated, least-privilege account) |
-| `AUTOHERO_APIC_VERIFY_TLS` | `true` | Verify the APIC certificate |
-| `AUTOHERO_ALLOW_LIVE_EXECUTION` | `false` | **Safety switch.** Changes on a real APIC are refused unless this is `true` |
-| `AUTOHERO_LLM_PROVIDER` | `mock` | `mock` (offline), `anthropic` (Claude) or `azure` (Azure OpenAI) |
-| `ANTHROPIC_API_KEY` / `AUTOHERO_ANTHROPIC_MODEL` | – / `claude-opus-5-5` | Claude settings |
+| `ARGUS_CONNECTOR` | `mock` | `mock` (built-in ACI lab) or `apic` (real controller) |
+| `ARGUS_APIC_URL` / `_USERNAME` / `_PASSWORD` | – | APIC credentials (use a dedicated, least-privilege account) |
+| `ARGUS_APIC_VERIFY_TLS` | `true` | Verify the APIC certificate |
+| `ARGUS_ALLOW_LIVE_EXECUTION` | `false` | **Safety switch.** Changes on a real APIC are refused unless this is `true` |
+| `ARGUS_LLM_PROVIDER` | `mock` | `mock` (offline), `anthropic` (Claude) or `azure` (Azure OpenAI) |
+| `ANTHROPIC_API_KEY` / `ARGUS_ANTHROPIC_MODEL` | – / `claude-opus-5-5` | Claude settings |
 | `AZURE_OPENAI_ENDPOINT` / `_API_KEY` / `_DEPLOYMENT` / `_API_VERSION` | – | Azure OpenAI settings |
-| `AUTOHERO_REDACT` | `true` | Mask sensitive values before LLM calls |
-| `AUTOHERO_DATABASE_URL` | SQLite in `runtime/` | SQLAlchemy URL (Postgres supported) |
-| `AUTOHERO_SECRET_KEY` | dev key | Session signing key. **Set this in any shared environment** |
-| `AUTOHERO_DEMO_PASSWORD` | `AutoHero-Demo-2026` | Password used to seed the demo users |
+| `ARGUS_REDACT` | `true` | Mask sensitive values before LLM calls |
+| `ARGUS_DATABASE_URL` | SQLite in `runtime/` | SQLAlchemy URL (Postgres supported) |
+| `ARGUS_SECRET_KEY` | dev key | Session signing key. **Set this in any shared environment** |
+| `ARGUS_DEMO_PASSWORD` | `Argus-Demo-2026` | Password used to seed the demo users |
 
 ### Switching AI provider
 
 ```env
 # Claude (Anthropic)
-AUTOHERO_LLM_PROVIDER=anthropic
+ARGUS_LLM_PROVIDER=anthropic
 ANTHROPIC_API_KEY=sk-ant-...
 
 # Azure OpenAI
-AUTOHERO_LLM_PROVIDER=azure
+ARGUS_LLM_PROVIDER=azure
 AZURE_OPENAI_ENDPOINT=https://<resource>.openai.azure.com
 AZURE_OPENAI_API_KEY=...
 AZURE_OPENAI_DEPLOYMENT=<deployment-name>
@@ -179,11 +182,11 @@ The full design (components, data model, lifecycle, security, deployment, extens
 ## Project layout
 
 ```
-autohero/
+argus/
   main.py              FastAPI app + page routes (incl. public /present overview)
   config.py            settings from env / .env
   db.py                SQLAlchemy models (users, changes, events, audit)
-  cli.py               `autohero serve | export | reset-lab`
+  cli.py               `argus serve | export | reset-lab`
   api/routes.py        JSON API (auth, inventory, topology, chat, changes, audit)
   core/                model.py (normalized model), inventory, security (RBAC), audit
   connectors/          base interface, aci_mo (normalize/export), aci_mock, aci_apic, registry
@@ -211,7 +214,7 @@ Interactive OpenAPI docs are at `/docs` once the app is running. The executive p
 | `POST` | `/api/changes/{id}/{dry-run\|submit\|approve\|reject\|execute\|rollback}` | Lifecycle actions |
 | `GET` | `/api/audit` | Audit trail |
 
-CLI: `autohero export --format apic > fabric.json` and `autohero reset-lab`.
+CLI: `argus export --format apic > fabric.json` and `argus reset-lab`.
 
 ## Testing
 
@@ -223,9 +226,9 @@ There are 20 tests. They cover the normalizer, export round-trip, every pre-chec
 
 ## Security notes
 
-- Run AutoHero behind a TLS reverse proxy, and set a strong `AUTOHERO_SECRET_KEY` and demo password.
-- Keep `AUTOHERO_ALLOW_LIVE_EXECUTION=false` until the APIC integration has been validated in a lab.
-- Give the APIC account only the privileges AutoHero needs (tenant-scoped write).
+- Run Argus behind a TLS reverse proxy, and set a strong `ARGUS_SECRET_KEY` and demo password.
+- Keep `ARGUS_ALLOW_LIVE_EXECUTION=false` until the APIC integration has been validated in a lab.
+- Give the APIC account only the privileges Argus needs (tenant-scoped write).
 - Review the data-handling policy before you enable an external LLM. Masking is on by default, and offline mode sends nothing.
 
 ## Roadmap
@@ -236,4 +239,4 @@ There are 20 tests. They cover the normalizer, export round-trip, every pre-chec
 
 ---
 
-<sub>AutoHero uses an original visual identity. It is not affiliated with or endorsed by any operator brand, and it contains no third-party logos. Mock lab data is fictional.</sub>
+<sub>Argus uses an original visual identity. It is not affiliated with or endorsed by any operator brand, and it contains no third-party logos. Mock lab data is fictional.</sub>

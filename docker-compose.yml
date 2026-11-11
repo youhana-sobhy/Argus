@@ -1,11 +1,11 @@
-# AutoHero on-prem deployment.
+# Argus on-prem deployment.
 #   docker compose up -d                       -> demo (SQLite, mock lab, offline AI)
-#   docker compose --profile postgres up -d    -> adds PostgreSQL; set AUTOHERO_DATABASE_URL in .env
+#   docker compose --profile postgres up -d    -> adds PostgreSQL; set ARGUS_DATABASE_URL in .env
 services:
-  autohero:
+  argus:
     build: .
-    image: autohero:0.1.0
-    container_name: autohero
+    image: argus:0.1.0
+    container_name: argus
     restart: unless-stopped
     ports:
       - "8000:8000"
@@ -13,22 +13,22 @@ services:
       - path: .env
         required: false
     environment:
-      AUTOHERO_RUNTIME_DIR: /data
-      AUTOHERO_DATABASE_URL: ${AUTOHERO_DATABASE_URL:-sqlite:////data/autohero.db}
+      ARGUS_RUNTIME_DIR: /data
+      ARGUS_DATABASE_URL: ${ARGUS_DATABASE_URL:-sqlite:////data/argus.db}
     volumes:
-      - autohero-data:/data
+      - argus-data:/data
 
   db:
     image: postgres:16-alpine
     profiles: ["postgres"]
     restart: unless-stopped
     environment:
-      POSTGRES_USER: autohero
+      POSTGRES_USER: argus
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-change-me}
-      POSTGRES_DB: autohero
+      POSTGRES_DB: argus
     volumes:
-      - autohero-pg:/var/lib/postgresql/data
+      - argus-pg:/var/lib/postgresql/data
 
 volumes:
-  autohero-data:
-  autohero-pg:
+  argus-data:
+  argus-pg:

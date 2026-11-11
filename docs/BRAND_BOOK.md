@@ -1,12 +1,12 @@
-<p align="center"><img src="brand/autohero-logo-horizontal.svg" width="380" alt="AutoHero"></p>
+<p align="center"><img src="brand/argus-logo-horizontal.svg" width="380" alt="Argus"></p>
 
-# AutoHero brand book
+# Argus brand book
 
 **Version 1.0 · MVP**
 
-AutoHero has its own original identity, designed to sit comfortably inside a large telco's internal tooling landscape. It uses a confident red with plenty of white, graphite and air.
+Argus has its own original identity, designed to sit comfortably inside a large telco's internal tooling landscape. It uses a confident red with plenty of white, graphite and air.
 
-> **Trademark note.** AutoHero does **not** use any official operator logo, the "speech mark" symbol, proprietary typefaces or trademarked assets. The red is an original value (`#E3051B`, "Signal Red") chosen to feel at home next to telco reds without copying one. If AutoHero is ever co-branded, the corporate brand team must supply the official assets and guidelines, and those take precedence over this document.
+> **Trademark note.** Argus does **not** use any official operator logo, the "speech mark" symbol, proprietary typefaces or trademarked assets. The red is an original value (`#E3051B`, "Signal Red") chosen to feel at home next to telco reds without copying one. If Argus is ever co-branded, the corporate brand team must supply the official assets and guidelines, and those take precedence over this document.
 
 ---
 
@@ -14,7 +14,7 @@ AutoHero has its own original identity, designed to sit comfortably inside a lar
 
 **"Your network, understood and changed safely."**
 
-AutoHero is the calm expert at the engineer's side. It reads the whole fabric, explains it in plain language, and never makes a change without a dry-run, a second pair of eyes and a way back.
+Argus is the calm expert at the engineer's side. It reads the whole fabric, explains it in plain language, and never makes a change without a dry-run, a second pair of eyes and a way back.
 
 | Attribute | Means | Does not mean |
 |---|---|---|
@@ -25,26 +25,28 @@ AutoHero is the calm expert at the engineer's side. It reads the whole fabric, e
 
 ## 2. Logo
 
-<p><img src="brand/autohero-mark.svg" width="72" alt="mark"> &nbsp;&nbsp; <img src="brand/autohero-logo-horizontal.svg" width="300" alt="horizontal logo"></p>
+<p><img src="brand/argus-mark.svg" width="72" alt="mark"> &nbsp;&nbsp; <img src="brand/argus-logo-horizontal.svg" width="300" alt="horizontal logo"></p>
 
-**The mark** is an "A" drawn as a network path that climbs to a summit node, the "hero" point where the platform sees everything. A forward arrow crosses the A, standing for change moving forward. It sits in a rounded square (radius 25% of the size) with a Signal Red to Ember gradient.
+**The name.** Argus is the hundred-eyed watchman of Greek myth who never sleeps and sees everything. It stands for what the platform does: it knows the live state of the network, checks before a change and verifies after it. It also pairs naturally with the team's Hydra automation front end: *Hydra executes, Argus sees.*
 
-**The wordmark** is "Auto" in Graphite and "Hero" in Signal Red, set in Inter ExtraBold (800) with -2% tracking. The optional descriptor "NETWORK AUTOMATION" is Inter SemiBold, all caps, with +20% tracking, in Slate.
+**The mark** is an "A" drawn as a network path that climbs to a summit node, the watchful eye where the platform sees everything. A forward arrow crosses the A, standing for change moving forward. It sits in a rounded square (radius 25% of the size) with a Signal Red to Ember gradient.
+
+**The wordmark** is "Argus" in Graphite, set in Inter ExtraBold (800) with -2% tracking. The optional descriptor "NETWORK AUTOMATION" is Inter SemiBold, all caps, with +20% tracking, in Slate.
 
 | Rule | Value |
 |---|---|
 | Clear space | At least the height of the summit node (≈ 1/8 of the mark) on every side |
 | Minimum size | Mark 20 px / 6 mm. Horizontal logo 120 px / 32 mm wide |
-| On dark backgrounds | Mark as is. Wordmark "Auto" in white, "Hero" in Signal Red or white at 75% |
+| On dark backgrounds | Mark as is. Wordmark "Argus" in white |
 | On red backgrounds | White mark tile with a red symbol, white wordmark |
 
 **Don't:** recolor the mark, add shadows or outlines, rotate it, stretch it, put it inside a circle or speech bubble, or combine it with any operator logo without brand approval.
 
-Files: [`brand/autohero-mark.svg`](brand/autohero-mark.svg), [`brand/autohero-logo-horizontal.svg`](brand/autohero-logo-horizontal.svg)
+Files: [`brand/argus-mark.svg`](brand/argus-mark.svg), [`brand/argus-logo-horizontal.svg`](brand/argus-logo-horizontal.svg)
 
 ## 3. Color
 
-<img src="brand/palette.svg" alt="AutoHero palette" width="100%">
+<img src="brand/palette.svg" alt="Argus palette" width="100%">
 
 | Token | Hex | Use |
 |---|---|---|
@@ -122,7 +124,7 @@ The icons are an original set: 24 px grid, 1.9 px rounded stroke, no fills, draw
 
 | Surface | Guidance |
 |---|---|
-| Web app | Implemented in `autohero/web/static/css/autohero.css`. The CSS custom properties are the source of truth for these tokens |
+| Web app | Implemented in `argus/web/static/css/argus.css`. The CSS custom properties are the source of truth for these tokens |
 | Slides | White background, a Graphite title, one red accent per slide, the mark top-left, and screenshots in 14 px rounded frames |
 | Docs | The horizontal logo at the top, tables for decisions, and Mermaid diagrams |
 | Email / Teams | Use the mark only (no wordmark) as the avatar or icon |
